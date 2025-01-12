@@ -7,7 +7,9 @@ requiredAddons[]=
 	"cav_charlie_characters",
 	"A3_Weapons_F_Ammoboxes",
 	"ace_cargo",
-	"Desert",
 	"cav_troops_charlie_weapons",
-	"rhsusf_c_m11xx"
+	"rhsusf_c_m11xx",
+	"rhsusf_vehicles",
+	"rhsusf_c_RG33L",
+	"Desert"
 };
