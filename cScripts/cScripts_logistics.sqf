@@ -393,6 +393,7 @@
         ["ACE_wirecutter", 0],
         ["ACE_Fortify",0],
         ["ACE_M26_Clacker",0],
+        ["ACE_Clacker",0],
         
         // Equipment
         ["ace_marker_flags_black",0],
@@ -421,7 +422,8 @@
         ["ACE_HandFlare_Yellow",0],
 
         // Explosives
-        ["DemoCharge_Remote_Mag",0]
+        ["DemoCharge_Remote_Mag",0],
+        ["AMP_Breaching_Charge_Mag",0]
     ]],
 
     ["charlie_company", [
