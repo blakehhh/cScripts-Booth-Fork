@@ -62,7 +62,7 @@ private _crateName = if ( !(_fullLableCheck) ) then {
 _object addAction [format ["<img image='cScripts\Data\Icon\icon_00.paa' /> 7th Cavalry%1Equipment Crate", _crateName], {}, [], 1.5, true, true, "", "true", 5];
 
 // Call ReGear Option
-if (_reGearOption) then {
+if (_reGearOption && _quickSelectScale != "manual") then {
     [_object] call FUNC(addReGear);
 };
 // Call addHeal option
@@ -71,12 +71,18 @@ if (_reHealOption) then {
 };
 
 // Call Quick Selection
-[_object, "ACE_MainActions", _allowAllLoadouts] call FUNC(setupLoadoutSelection);
+if (_quickSelectScale != "manual") then {
+    [_object, "ACE_MainActions", _allowAllLoadouts] call FUNC(setupLoadoutSelection);
+};
 
 // Call Insignia Selection
 if (_InsigniaSelectOption) then {
     [_object] call FUNC(addInsigniaSelectionList);
 };
+
+// Add Eat Meal and Role Permissions interactions
+[_object] call FUNC(addEatMeal);
+[_object] call FUNC(addRolePermissions);
 
 // Make end of options line.
 _object addAction ["---", {}, [], 1.5, true, true, "", "true", 5];
@@ -91,7 +97,7 @@ _object enableRopeAttach false;
 [_object, 100] call FUNC(deleteDroppedObjects);
 
 // Stageing zone
-if (_hasStagingZone) then {
+if (_hasStagingZone && _quickSelectScale != "manual") then {
     [_object, 25] call FUNC(addStagingZone);
 };
 

@@ -145,6 +145,8 @@ class cScripts {
         class addReGear {};
         class addHeal {};
         class addArsenal {};
+        class addEatMeal {};
+        class addRolePermissions {};
         
         class createActionCategory {};
 
