@@ -14,10 +14,10 @@ if (!isMultiplayer) then {SHOW_CHAT_WARNING("", "Mission is running on singelpla
     logEntities;
 #endif
 
-enableSaving [false, false];
+//enableSaving [false, false];
 
 // To Turns off or on ambient Wildelife, Ambient Sounds and wind sound strenght.
-enableEnvironment [false, true, 1];
+//enableEnvironment [false, true, 1];
 
 ACE_maxWeightCarry = 8000;
 ACE_maxWeightDrag = 12000;
