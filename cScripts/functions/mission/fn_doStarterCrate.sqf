@@ -76,7 +76,7 @@ if (_quickSelectScale != "manual") then {
 };
 
 // Call Insignia Selection
-if (_InsigniaSelectOption) then {
+if (_InsigniaSelectOption && _quickSelectScale != "manual") then {
     [_object] call FUNC(addInsigniaSelectionList);
 };
 
