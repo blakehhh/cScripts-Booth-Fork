@@ -96,10 +96,7 @@ _object enableRopeAttach false;
 // Make Starter crate clean junk around it
 [_object, 100] call FUNC(deleteDroppedObjects);
 
-// Stageing zone
-if (_hasStagingZone && _quickSelectScale != "manual") then {
-    [_object, 25] call FUNC(addStagingZone);
-};
+
 
 // Add save gear eventHandler
 [_object, "ContainerClosed", {

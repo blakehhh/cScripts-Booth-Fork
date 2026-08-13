@@ -4,12 +4,11 @@ class cScripts {
         class init_aceArsenal {};
         class init_aceItemReplace {};
 
-        class init_skillAdjustment {};
-        class init_vehicle {};
-        class init_staging {};
+
+
 
         class init_logistics {};
-        class init_pylons {};
+
 
         class init_diary {};
         class init_message {};
@@ -21,9 +20,6 @@ class cScripts {
     };
     class documents {
         file = "cScripts\functions\documents";
-        class Doc_Info {};
-        class Doc_Radio {};
-        class Doc_MissionControl {};
 
         class DocRadio_LACEACE {};
         class DocRadio_MEDEVAC {};
@@ -53,41 +49,7 @@ class cScripts {
         class logistics_getContainer {};
         class logistics_getAllContainerItems {};
     };
-    class players {
-        file = "cScripts\functions\players";
 
-        class profile_saveInsignia {};
-        class profile_loadInsignia {};
-
-        class player_hasClanTag {};
-        class player_getClanTag {};
-
-        class player_getRank {};
-        class player_setRank {};
-        class player_getRole {};
-
-        class player_isCurator {};
-        class player_isMissionAdmin {};
-        class unit_setTeamColor {};
-        
-        class unit_getName {};
-        class unit_setInsignia {};
-        class unit_getSquadInsignia {};
-        class unit_getSquadName {};
-
-
-        class getRadioChannel {};
-        class setRadioChannel {};
-        class setActiveRadio {};
-
-        class player_getOrganization {};
-        class player_getCompany {};
-        class player_getPlatoon {};
-        class player_setOrganization {};
-
-        // Other Functions
-        class unit_getVariables {};
-    };
     class mission {
         file = "cScripts\functions\mission";
         class gate {};
@@ -103,7 +65,7 @@ class cScripts {
         class setVehicleLable {};
         
         class addBaseCrate {};
-        class addStagingZone {};
+
 
         class doStarterCrate {};
 
@@ -125,7 +87,7 @@ class cScripts {
         class addDefaultArsenalLoadouts {};
         class clearDefaultArsenalLoadouts {};
 
-        class checkStagingZone {};
+
 
         class deleteDroppedObjects {};
 
@@ -154,10 +116,10 @@ class cScripts {
 
         class addObjectToCurator {};
 
-        class getChannelName {};
-        class clearRadioIds {};
+
+
         class filterUnitLoadout {};
-        class getRadioBase {};
+
 
         class isValidFaction {};
         
@@ -170,44 +132,7 @@ class cScripts {
         class getAttendance {};
         class getServerMetrics {};
     };
-    class vehicle {
-        file = "cScripts\functions\vehicle";
-        class vehicle_addInventory {};
-        class vehicle_addFunctions {};
-        class vehicle_addFunctionsGlobal {};
-        class vehicle_addCosmetics {};
-        class vehicle_addRadio {};
-        class vehicle_setRadio {};
 
-        class vehicle_applyTextures {};
-
-        // Staging
-        class vehicle_addStagingActions {};
-
-        class vehicle_addRegearAction {};
-        class vehicle_addRepairAction {};
-
-        class vehicle_addCosmeticSelection {};
-        class vehicle_addPylonSelection {};
-        class vehicle_setupPylonCategories {};
-
-        class vehicle_applyLoadout {};
-        class vehicle_addDefaultLoadout {};
-
-        class vehicle_getPylonName {};
-        class vehicle_getPylonLoadout {};
-        class vehicle_getPylonIcon {};
-
-        // Other
-        class vehicle_reset {};
-        class vehicle_addFlagAction {};
-    };
-    class civ {
-        file = "cScripts\functions\civ";
-        class civ_init {};
-        class civ_checkProjectile {};
-        class civ_damage {};
-    };
     class modules {
         file = "cScripts\functions\modules";
         class zenModule_EnableUnitSimulation {};
@@ -217,10 +142,8 @@ class cScripts {
 
         class zenModule_applyLoadout {};
         class zenModule_RegearTrooper {};
-        // class zenModule_RekitVehicle {};
-        class zenModule_ResetPlayerRadio {};
 
-        class zenModule_stagingZones {};
+
 
         class zenModule_CallEndex {};
     };
@@ -237,7 +160,7 @@ class cScripts {
         class gear_selectLoadout {};
         class gear_getSideConfig {};
 
-        class gear_setupRadios {};
+
 
         // Save and Load
         class gear_saveLoadout {};

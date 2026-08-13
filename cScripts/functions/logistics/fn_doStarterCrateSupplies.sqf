@@ -32,7 +32,7 @@ private _alpha   = ["ALPHA", "BUFFALO", "TITAN", "RAIDER", "SPARROW"];
 private _bravo   = ["BRAVO", "LANCER", "VIKING", "SABER", "BANSHEE", "ATLAS"];
 private _charlie = ["CHARLIE", "BANDIT", "MISFIT"];
 
-if !(_companySelector in (["NONE", "FULL", "ALL"] + _officer + _alpha + _bravo + _charlie)) exitWith {
+if !(_companySelector in (["NONE", "FULL", "ALL", "MANUAL"] + _officer + _alpha + _bravo + _charlie)) exitWith {
     ERROR_2("StarterCrate", "%1 (Starter Crate Supplies) is using a unsupported cartegory '%2'.", _crate, _companySelector);
 };
 
@@ -64,6 +64,7 @@ private _container = switch (_companySelector) do {
     };
 
     case "";
+    case "MANUAL";
     case "NONE": {[]};
     default {[]};
 };

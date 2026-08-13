@@ -20,9 +20,6 @@ if !(player diarySubjectExists "7Cav") then {
     player createDiarySubject ["7Cav","7th Cavalry"];
 
     // Load diary records (NOTE! The load order is reversed. So the top will be at the bottom after load.)
-    call FUNC(Doc_MissionControl);
-    call FUNC(Doc_Radio);
-    call FUNC(Doc_Info);
 };
 
 // Add New Topic (Checklists)

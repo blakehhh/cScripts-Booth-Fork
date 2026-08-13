@@ -81,15 +81,6 @@ INFO("init", "Initializing custom Zen Modules.");
     "\a3\modules_f\data\portraitmodule_ca.paa"
 ] call zen_custom_modules_fnc_register;
 
-if (EGVAR(Settings,enableRadios)) then {
-    ["7Cav Utilities", "Reset Radio",
-        {
-            params ["_modulePos", "_objectPos"];
-            [_modulePos, _objectPos] call EFUNC(zenModule,ResetPlayerRadio);
-        },
-        "\a3\modules_f\data\portraitmodule_ca.paa"
-    ] call zen_custom_modules_fnc_register;
-};
 
 
 ["7Cav Mission", "Call Endex",
@@ -108,12 +99,6 @@ if (EGVAR(Settings,enableRadios)) then {
     "\a3\modules_f\data\portraitmodule_ca.paa"
 ] call zen_custom_modules_fnc_register;
 
-["7Cav Mission", "Staging Zones",
-    {
-        params ["_modulePos", "_objectPos"];
-        [_modulePos, _objectPos] call EFUNC(zenModule,stagingZones);
-    },
-    "\a3\modules_f\data\portraitmodule_ca.paa"
-] call zen_custom_modules_fnc_register;
+
 
 INFO("init", "Custom Zen Modules initialization complete");
