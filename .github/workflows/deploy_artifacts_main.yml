@@ -16,7 +16,7 @@ jobs:
         run: ./tools/deploy.sh DevBuild-$(git rev-parse --short HEAD)
 
       - name: Upload releases
-        uses: actions/upload-artifact@v3
+        uses: actions/upload-artifact@v4
         with:
           name: cScripts_DevBuilds
           path: release/*
