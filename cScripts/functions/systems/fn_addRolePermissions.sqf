@@ -1,7 +1,7 @@
 #include "..\script_component.hpp";
 /*
  * Author: 7th Cavalry
- * This function adds role permissions selection (Doctor, EOD, Engineer) to a given object.
+ * This function adds role permissions selection (Medic, CLS, EOD, Engineer) to a given object.
  *
  * Arguments:
  * 0: Object <OBJECT>
@@ -26,25 +26,32 @@ private _mainCategory = [_mainCategoryName, "Retrieve Permissions", "", {}, {tru
 
 private _newCategory = _category + [_mainCategoryName];
 
-private _doctorStatement = {
-    player setVariable ["ace_medical_medicClass", 2, true];
-    systemChat "You are now a Doctor.";
+private _clsStatement = {
+    player setVariable ["ace_medical_medicClass", 1, true];
+    systemChat "You are now a Combat Lifesaver (CLS).";
 };
-private _doctorAction = [QEGVAR(Actions,RoleDoctor), "Doctor", "\z\ace\addons\medical_gui\ui\cross.paa", _doctorStatement, {true}] call ace_interact_menu_fnc_createAction;
-[_object, _actionType, _newCategory, _doctorAction] call ace_interact_menu_fnc_addActionToObject;
+private _clsAction = [QEGVAR(Actions,RoleCLS), "Combat Lifesaver (CLS)", "\z\ace\addons\medical_gui\ui\cross.paa", _clsStatement, {true}] call ace_interact_menu_fnc_createAction;
+[_object, _actionType, _newCategory, _clsAction] call ace_interact_menu_fnc_addActionToObject;
+
+private _medicStatement = {
+    player setVariable ["ace_medical_medicClass", 2, true];
+    systemChat "You are now a Medic.";
+};
+private _medicAction = [QEGVAR(Actions,RoleMedic), "Medic", "\z\ace\addons\medical_gui\ui\cross.paa", _medicStatement, {true}] call ace_interact_menu_fnc_createAction;
+[_object, _actionType, _newCategory, _medicAction] call ace_interact_menu_fnc_addActionToObject;
 
 private _eodStatement = {
     player setVariable ["ACE_isEOD", true, true];
     systemChat "You are now an Explosive/Demo Specialist.";
 };
-private _eodAction = [QEGVAR(Actions,RoleEOD), "Explosive/Demo Specialist", "\z\ace\addons\explosives\UI\Defuse_Icon_ca.paa", _eodStatement, {true}] call ace_interact_menu_fnc_createAction;
+private _eodAction = [QEGVAR(Actions,RoleEOD), "Explosive/Demo Specialist", "\z\ace\addons\explosives\UI\Defuse_ca.paa", _eodStatement, {true}] call ace_interact_menu_fnc_createAction;
 [_object, _actionType, _newCategory, _eodAction] call ace_interact_menu_fnc_addActionToObject;
 
 private _engineerStatement = {
     player setVariable ["ace_isEngineer", 2, true];
-    systemChat "You are now an Advanced Engineer.";
+    systemChat "You are now an Engineer.";
 };
-private _engineerAction = [QEGVAR(Actions,RoleEngineer), "Advanced Engineer", "\z\ace\addons\interaction\ui\repair_ca.paa", _engineerStatement, {true}] call ace_interact_menu_fnc_createAction;
+private _engineerAction = [QEGVAR(Actions,RoleEngineer), "Advanced Engineer", "\a3\ui_f\data\IGUI\Cfg\Actions\repair_ca.paa", _engineerStatement, {true}] call ace_interact_menu_fnc_createAction;
 [_object, _actionType, _newCategory, _engineerAction] call ace_interact_menu_fnc_addActionToObject;
 
 private _removeAllStatement = {
