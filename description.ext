@@ -73,3 +73,12 @@ class CfgFunctions {
 #include "cScripts\CfgLoadouts.hpp"
 
 /*           OTHER            */
+class CfgRemoteExec
+{
+    class Functions
+    {
+        mode = 2; // 1 = Whitelist only, 2 = Open/All allowed
+        jip = 1;  // Set to 1 if JIP (Join in Progress) is needed
+
+    };
+};
