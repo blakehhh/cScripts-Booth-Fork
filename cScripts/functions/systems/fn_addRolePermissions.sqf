@@ -35,7 +35,7 @@ private _clsAction = [QEGVAR(Actions,RoleCLS), "Combat Lifesaver (CLS)", "\z\ace
 
 private _medicStatement = {
     player setVariable ["ace_medical_medicClass", 2, true];
-    systemChat "You are now a Medic.";
+    systemChat "You are now a Medic (Doctor).";
 };
 private _medicAction = [QEGVAR(Actions,RoleMedic), "Medic", "\z\ace\addons\medical_gui\ui\cross.paa", _medicStatement, {true}] call ace_interact_menu_fnc_createAction;
 [_object, _actionType, _newCategory, _medicAction] call ace_interact_menu_fnc_addActionToObject;
@@ -49,9 +49,9 @@ private _eodAction = [QEGVAR(Actions,RoleEOD), "Explosive/Demo Specialist", "\z\
 
 private _engineerStatement = {
     player setVariable ["ace_isEngineer", 2, true];
-    systemChat "You are now an Engineer.";
+    systemChat "You are now an Advanced Engineer.";
 };
-private _engineerAction = [QEGVAR(Actions,RoleEngineer), "Advanced Engineer", "\a3\ui_f\data\IGUI\Cfg\Actions\repair_ca.paa", _engineerStatement, {true}] call ace_interact_menu_fnc_createAction;
+private _engineerAction = [QEGVAR(Actions,RoleEngineer), "Engineer", "\a3\ui_f\data\IGUI\Cfg\Actions\repair_ca.paa", _engineerStatement, {true}] call ace_interact_menu_fnc_createAction;
 [_object, _actionType, _newCategory, _engineerAction] call ace_interact_menu_fnc_addActionToObject;
 
 private _removeAllStatement = {
