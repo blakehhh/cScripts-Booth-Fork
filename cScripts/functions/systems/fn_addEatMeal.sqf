@@ -1,7 +1,7 @@
 #include "..\script_component.hpp";
 /*
  * Author: 7th Cavalry
- * This function adds an action to eat a meal and drink water to a given object.
+ * This function adds an action to eat a meal to a given object.
  *
  * Arguments:
  * 0: Object <OBJECT>
@@ -30,8 +30,7 @@ private _eatStatement = {
         params ["_args"];
         _args params ["_player"];
         _player setVariable ["acex_field_rations_hunger", 0, true];
-        _player setVariable ["acex_field_rations_thirst", 0, true];
-        systemChat "You have eaten a meal and drank water.";
+        systemChat "You have eaten a meal.";
         _player setVariable ["ace_field_rations_previousAnim", nil];
     }, {
         params ["_args"];
