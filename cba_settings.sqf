@@ -1052,6 +1052,15 @@ force force fscl_gForceThreshold = 5;
 force force fscl_ignoreNonPlayerVehicles = true;
 force force fscl_stateThreshold = 10;
 
+// GX - Drones
+//GX_DRONES_AUTOCONNECT = true;
+force force GX_DRONES_COMMAND_INTERACTION_ENABLE = true;
+force force GX_DRONES_COMMAND_NON_CONNECTED_ENABLE = true;
+force force GX_DRONES_TIME_TO_DEPLOY = 3;
+force force GX_DRONES_TIME_TO_PICKUP = 3;
+force force GX_DRONES_TIME_TO_REARM = 2;
+force force GX_DRONES_TIME_TO_RECHARGE = 2;
+
 // Hide Among The Grass
 force force hatg_setting_building = true;
 force force hatg_setting_complex_detection = true;
@@ -1280,12 +1289,12 @@ kat_misc_AFAK_Container = 0;
 kat_misc_AFAK_Item_Color = [0.67,0.84,0.9];
 force force kat_misc_AFAK_RemoveWhenEmpty = true;
 kat_misc_AFAK_Slot_Color = [1,0.96,0.32];
-force force kat_misc_AFAKFifthSlotItem = "[['kat_guedel', 3]]";
-force force kat_misc_AFAKFirstSlotItem = "[['ACE_tourniquet', 4], ['ACE_splint', 2]]";
-force force kat_misc_AFAKFourthSlotItem = "[['kat_chestSeal', 4], ['kat_ncdKit', 4]]";
-force force kat_misc_AFAKSecondSlotItem = "[['ACE_packingBandage', 10], ['ACE_quikclot', 10]]";
-force force kat_misc_AFAKSixthSlotItem = "[['ACE_morphine', 3], ['ACE_epinephrine', 3]]";
-force force kat_misc_AFAKThirdSlotItem = "[['kat_Penthrox', 2], ['kat_Painkiller', 1]]";
+force force kat_misc_AFAKFifthSlotItem = "[['kat_ncdKit', 2], ['kat_chestSeal', 4], ['kat_stethoscope', 1]]";
+force force kat_misc_AFAKFirstSlotItem = "[['ACE_tourniquet', 4], ['kat_phenylephrineAuto', 3], ['ACE_epinephrine', 3]]";
+force force kat_misc_AFAKFourthSlotItem = "[['kat_pocketBVM', 1]]";
+force force kat_misc_AFAKSecondSlotItem = "[['ACE_packingBandage', 20], ['ACE_quikclot', 10]]";
+force force kat_misc_AFAKSixthSlotItem = "[['kat_IV_16', 2], ['kat_Carbonate', 1], ['kat_naloxone', 1], ['kat_TXA', 1], ['ACE_salineIV_250', 2]]";
+force force kat_misc_AFAKThirdSlotItem = "[['kat_Penthrox', 1], ['ACE_morphine', 2], ['kat_Painkiller', 2]]";
 force force kat_misc_allowSharedVehicleEquipment = 4;
 kat_misc_armbandSlingLeftArm = "[0.2, -0.39, -0.2]";
 kat_misc_armbandSlingLeftArmRotation = "[240, 33, 26]";
@@ -1301,10 +1310,10 @@ kat_misc_IFAK_Container = 0;
 kat_misc_IFAK_Item_Color = [0.67,0.84,0.9];
 force force kat_misc_IFAK_RemoveWhenEmpty = true;
 kat_misc_IFAK_Slot_Color = [1,0.3,0.3];
-force force kat_misc_IFAKFirstSlotItem = "[['ACE_tourniquet', 2], ['kat_phenylephrineAuto', 2]]";
+force force kat_misc_IFAKFirstSlotItem = "[['ACE_tourniquet', 4], ['kat_phenylephrineAuto', 2], ['ACE_epinephrine', 2]]";
 force force kat_misc_IFAKFourthSlotItem = "[['kat_chestSeal', 2], ['kat_ncdKit', 1]]";
 force force kat_misc_IFAKSecondSlotItem = "[['ACE_packingBandage', 10], ['ACE_quikclot', 10]]";
-force force kat_misc_IFAKThirdSlotItem = "[['kat_Painkiller', 1], ['ACE_epinephrine', 2]]";
+force force kat_misc_IFAKThirdSlotItem = "[['kat_Penthrox', 1], ['ACE_splint', 2]";
 force force kat_misc_incompatibilityWarning = true;
 kat_misc_MFAK_Container = 0;
 kat_misc_MFAK_Item_Color = [0.67,0.84,0.9];
@@ -1324,7 +1333,7 @@ force force kat_misc_tourniquetEffects_PositiveMultiplier = 0.5;
 force force kat_misc_treatmentTimeDetachTourniquet = 7;
 
 // KAT - ADV Medical: Ophthalmology
-force kat_ophthalmology_enable = true;
+force kat_ophthalmology_enable = false;
 force kat_ophthalmology_eyeshield_medic_required = 0;
 force kat_ophthalmology_eyeshield_treatment_time = 2;
 force kat_ophthalmology_eyewash_medic_required = 0;
