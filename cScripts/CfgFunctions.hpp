@@ -109,6 +109,7 @@ class cScripts {
         class addArsenal {};
         class addEatMeal {};
         class addRolePermissions {};
+        class addLoadoutLocker {};
         
         class createActionCategory {};
 
