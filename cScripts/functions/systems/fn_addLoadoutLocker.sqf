@@ -252,6 +252,33 @@ private _lockerAction = [
                 ] call ace_interact_menu_fnc_createAction;
                 _actions pushBack [_utilityCategory, [], _target];
             };
+            
+            // Force Abandon for Admins / Zeus (only if they aren't the owner, as owners already have it in Utility)
+            private _isAdmin = serverCommandAvailable "#kick" || {!isNull (getAssignedCuratorLogic _player)};
+            if (_isAdmin && {getPlayerUID _player != _ownerUID}) then {
+                private _forceAbandonAction = [
+                    QEGVAR(systems,forceAbandonLocker),
+                    "<t color='#FF0000'>Force Abandon (Admin)</t>",
+                    "",
+                    {
+                        params ["_target", "_player"];
+                        private _ownerName = _target getVariable [QEGVAR(systems,locker_owner), "Unknown"];
+                        private _targetUID = _target getVariable [QEGVAR(systems,locker_ownerUID), ""];
+                        
+                        _target setVariable [QEGVAR(systems,locker_owner), "", true];
+                        _target setVariable [QEGVAR(systems,locker_ownerUID), "", true];
+                        
+                        private _ownerIndex = allPlayers findIf {getPlayerUID _x == _targetUID};
+                        if (_ownerIndex != -1) then {
+                            (allPlayers select _ownerIndex) setVariable [QEGVAR(systems,claimed_locker), objNull, true];
+                        };
+                        
+                        [format ["Force abandoned %1's locker.", _ownerName]] call ace_common_fnc_displayTextPicture;
+                    },
+                    {true}
+                ] call ace_interact_menu_fnc_createAction;
+                _actions pushBack [_forceAbandonAction, [], _target];
+            };
         };
         
         _actions
