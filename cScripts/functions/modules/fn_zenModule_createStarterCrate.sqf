@@ -25,58 +25,30 @@ params ["_modulePos", "_objectPos"];
                 [
                     'All',
                     'None',
-                    'Alpha',
-                    'Buffalo',
-                    'Titan',
-                    'Raider',
-                    'Sparrow',
-                    'Eagle',
-                    'Hog',
-                    'Bravo',
-                    'Saber',
-                    'Banshee',
-                    'Viking',
-                    'Lancer',
-                    'Atlas',
-                    'Charlie',
-                    'Bandit',
-                    'Misfit'
+                    'TFG Default'
                 ],
                 [
                     'Everything',
                     'None',
-                    'Alpha Company',
-                    '        - Buffalo',
-                    '        - Titan',
-                    '        - Raider',
-                    '        - Sparrow',
-                    '        - Eagle',
-                    '        - Hog',
-                    'Bravo Company',
-                    '        - Saber',
-                    '        - Banshee',
-                    '        - Viking',
-                    '        - Lancer',
-                    '        - Atlas',
-                    'Charlie Company',
-                    '        - Bandit',
-                    '        - Misfit'
+                    'TFG Default'
                 ],
                 1,
-                12
+                3
             ], false],
-        ["CHECKBOX", ["Allow all loadouts", "Show and allow all loadouts to be accessable."], false, false]
+        ["CHECKBOX", ["Allow all loadouts", "Show and allow all loadouts to be accessable."], false, false],
+        ["CHECKBOX", ["Enable Arsenal", "Enable full arsenal with blacklist."], false, false]
     ],
     {
         params ["_arg", "_pos"];
         _arg params [
             "_reHealOption",
             "_quickSelectScale",
-            "_allowAllLoadouts"
+            "_allowAllLoadouts",
+            "_enableArsenal"
         ];
         _pos params ["_modulePos"];
         private _crate = "B_supplyCrate_F" createVehicle _modulePos;
-        [_crate, _quickSelectScale, true, _reHealOption, true, _allowAllLoadouts] remoteExec [QFUNC(doStarterCrate), 0, true];
+        [_crate, _quickSelectScale, true, _reHealOption, true, _allowAllLoadouts, _enableArsenal] remoteExec [QFUNC(doStarterCrate), 0, true];
 
         // Add object to Zeus
         [{
