@@ -17,7 +17,7 @@
 params ["_modulePos", "_objectPos"];
 
 [
-    "7th Cavalry Starter Crate", 
+    "Starter Crate", 
     [
         ["CHECKBOX", ["Heal action", "Enables the crate to heal your wonds on regear as well as a separat action."], true, false],
         ["LIST", ["Company, squad or group", "Select the company, group or squad the crate should populate loadouts with."],

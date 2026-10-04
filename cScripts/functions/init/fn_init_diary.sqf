@@ -15,9 +15,9 @@ if (!isNil{player getVariable QEGVAR(player,documents)}) exitWith {SHOW_WARNING_
 
 INFO_1("initDiary", "Applying Diary Records to %1...", player);
 
-// Add New Topic (7th Cavalry)
-if !(player diarySubjectExists "7Cav") then {
-    player createDiarySubject ["7Cav","7th Cavalry"];
+// Add New Topic (Task Force Grey)
+if !(player diarySubjectExists "TFG") then {
+    player createDiarySubject ["TFG","Task Force Grey"];
 
     // Load diary records (NOTE! The load order is reversed. So the top will be at the bottom after load.)
 };

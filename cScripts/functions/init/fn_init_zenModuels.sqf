@@ -20,7 +20,7 @@ if !(EGVAR(Settings,enable7cavZeusModules)) exitWith {};
 
 INFO("init", "Initializing custom Zen Modules.");
 
-["7Cav AI", "Enable Unit Simulation",
+["TFG AI", "Enable Unit Simulation",
     {
         params ["_modulePos", "_objectPos"];
         [_modulePos, _objectPos] call EFUNC(zenModule,EnableUnitSimulation);    
@@ -29,7 +29,7 @@ INFO("init", "Initializing custom Zen Modules.");
 ] call zen_custom_modules_fnc_register;
 
 
-["7Cav Logistics", "Spawn Starter Crate",
+["TFG Logistics", "Spawn Starter Crate",
     {
         params ["_modulePos", "_objectPos"];
         [_modulePos, _objectPos] call EFUNC(zenModule,CreateStarterCrate);    
@@ -37,7 +37,7 @@ INFO("init", "Initializing custom Zen Modules.");
     "\A3\ui_f\data\map\vehicleicons\iconCrate_ca.paa"
 ] call zen_custom_modules_fnc_register;
 
-// ["7Cav Logistics", "Rekit Vehicle",
+// ["TFG Logistics", "Rekit Vehicle",
 //     {
 //         params ["_modulePos", "_objectPos"];
 //         [_modulePos, _objectPos] call EFUNC(zenModule,RekitVehicle);    
@@ -47,7 +47,7 @@ INFO("init", "Initializing custom Zen Modules.");
 
 // Check if increase training on location is true then add option.
 // if (ace_medical_treatment_locationsBoostTraining) then {
-//     ["7Cav Logistics", "Field Hospital",
+//     ["TFG Logistics", "Field Hospital",
 //         {
 //             params ["_modulePos", "_objectPos"];
 //             [_modulePos, _objectPos] call EFUNC(zenModule,CreateFieldHospital);
@@ -56,7 +56,7 @@ INFO("init", "Initializing custom Zen Modules.");
 //     ] call zen_custom_modules_fnc_register;
 // };
 
-["7Cav Logistics", "Spawn Re-supply Crate",
+["TFG Logistics", "Spawn Re-supply Crate",
     {
         params ["_modulePos", "_objectPos"];
         [_modulePos, _objectPos] call EFUNC(zenModule,CreateSupplyCrate);
@@ -65,7 +65,7 @@ INFO("init", "Initializing custom Zen Modules.");
 ] call zen_custom_modules_fnc_register;
 
 
-["7Cav Utilities", "Apply Loadout",
+["TFG Utilities", "Apply Loadout",
     {
         params ["_modulePos", "_objectPos"];
         [_modulePos, _objectPos] call EFUNC(zenModule,ApplyLoadout);
@@ -73,7 +73,7 @@ INFO("init", "Initializing custom Zen Modules.");
     "\a3\modules_f\data\portraitmodule_ca.paa"
 ] call zen_custom_modules_fnc_register;
 
-["7Cav Utilities", "Regear Trooper",
+["TFG Utilities", "Regear Trooper",
     {
         params ["_modulePos", "_objectPos"];
         [_modulePos, _objectPos] call EFUNC(zenModule,RegearTrooper);
@@ -83,7 +83,7 @@ INFO("init", "Initializing custom Zen Modules.");
 
 
 
-["7Cav Mission", "Call Endex",
+["TFG Mission", "Call Endex",
     {
         params ["_modulePos", "_objectPos"];
         [_modulePos, _objectPos] call EFUNC(zenModule,CallEndex);
@@ -91,7 +91,7 @@ INFO("init", "Initializing custom Zen Modules.");
     "\a3\modules_f\data\portraitmodule_ca.paa"
 ] call zen_custom_modules_fnc_register;
 
-["7Cav Mission", "Take attendence",
+["TFG Mission", "Take attendence",
     {
         [QGVAR(getAttendance)] call CBA_fnc_localEvent;
         ["All attended players have been saved to your RPT log"] call zen_common_fnc_showMessage;

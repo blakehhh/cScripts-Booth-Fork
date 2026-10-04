@@ -59,7 +59,7 @@ private _crateName = if ( !(_fullLableCheck) ) then {
         if (_quickSelectScale == 'tfg default') then { " TFG Default " } else { format [" %1 ", [_quickSelectScale] call CBA_fnc_capitalize] };
     };
 } else { ' ' };
-_object addAction [format ["<img image='cScripts\Data\Icon\icon_00.paa' /> 7th Cavalry%1Equipment Crate", _crateName], {}, [], 1.5, true, true, "", "true", 5];
+_object addAction [format ["<img image='cScripts\Data\Icon\icon_00.paa' /> %1Equipment Crate", _crateName], {}, [], 1.5, true, true, "", "true", 5];
 
 // Call ReGear Option
 if (_reGearOption && _quickSelectScale != "manual") then {

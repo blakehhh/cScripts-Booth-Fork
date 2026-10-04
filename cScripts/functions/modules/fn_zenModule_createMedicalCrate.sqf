@@ -30,7 +30,7 @@ private _displayTextList =
 
 
 [
-    "7th Cavalry Medical Crate", 
+    "Medical Crate", 
     [
         ["LIST", ["Crate Type", "Select the type of unit you are supplying with this crate"],
             [

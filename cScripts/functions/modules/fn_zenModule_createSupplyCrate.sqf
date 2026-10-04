@@ -31,7 +31,7 @@ private _displayTextList =
     ['Stinger MANPAD', "Contains 1 launcher and 2 missiles."]
 ];
 [
-    "7th Cavalry Supply Crates", 
+    "Supply Crates", 
     [
         ["LIST", ["Crate Type", "Select the type of unit you are supplying with this crate"],
             [

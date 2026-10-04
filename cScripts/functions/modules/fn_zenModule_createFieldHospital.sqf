@@ -16,7 +16,7 @@
 params ["_modulePos", "_objectPos"];
 
 [
-    "7th Cavalry Fieald Hostpital Crate", 
+    "Fieald Hostpital Crate", 
     [
         ["SLIDER:PERCENT", ["Supply size", "Regulate the total amount of supplies in the crate"], [0, 1, 1], false]
     ], 
