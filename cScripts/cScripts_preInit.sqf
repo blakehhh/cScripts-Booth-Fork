@@ -41,6 +41,10 @@ EGVAR(DATABASE,DONE) = false;
 GVAR(DATABASE) = call EFUNC(init,logistics);
 EGVAR(DATABASE,DONE) = true;
 
+// Blacklist Database
+GVAR(BLACKLIST) = call compileFinal preprocessFileLineNumbers "cScripts\cScripts_blacklist.sqf";
+if (isNil {GVAR(BLACKLIST)}) then { GVAR(BLACKLIST) = []; };
+
 
 call EFUNC(init,chatCommands);
 
