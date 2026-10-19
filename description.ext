@@ -61,16 +61,17 @@ class Header {
 };
 
 class Extended_PreInit_EventHandlers {
-    cScripts_preInit = "0 spawn compile preprocessFileLineNumbers 'cScripts\cScripts_preInit.sqf'";
+    cScripts_preInit = "call compile preprocessFileLineNumbers 'cScripts\cScripts_preInit.sqf'";
 };
 class Extended_PostInit_EventHandlers {
-    cScripts_postInit = "0 spawn compile preprocessFileLineNumbers 'cScripts\cScripts_postInit.sqf'";
+    cScripts_postInit = "call compile preprocessFileLineNumbers 'cScripts\cScripts_postInit.sqf'";
 };
 
 class CfgFunctions {
     #include "cScripts\CfgFunctions.hpp"
 };
 #include "cScripts\CfgLoadouts.hpp"
+#include "cScripts\dialogs\RscLoadoutLocker.hpp"
 
 /*           OTHER            */
 class CfgRemoteExec

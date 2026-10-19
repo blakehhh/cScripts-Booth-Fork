@@ -36,7 +36,7 @@ private _cScriptSettings = "cScripts Mission Settings";
     true,
     {
         params ["_value"];
-        { EGVAR(Staging,showAllLoadouts) = _value; } remoteExecCall ["call"];
+        EGVAR(Staging,showAllLoadouts) = _value;
     },
     false
 ] call CBA_fnc_addSetting;

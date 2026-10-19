@@ -26,9 +26,8 @@ _object setVariable [QEGVAR(training,hitIndikatorColor), _color];
 _object addEventHandler ["HitPart", {
     _this#0 params ["_object", "", "", "_position"];
 
-    // Create marker on impact
-    private _marker = "Sign_Sphere10cm_F" createVehicle [0,0,0];
-    _marker setPosASL _position;
+    // Create marker on impact (local simple object with no physics/simulation/network overhead)
+    private _marker = createSimpleObject ["Sign_Sphere10cm_F", _position, true];
 
     // Handle other board indicator
     private _board = _object getVariable [QEGVAR(training,hitIndikator), _object];
@@ -49,9 +48,9 @@ _object addEventHandler ["HitPart", {
     // Save marker for future clearing
     private _hitmarkers = _board getVariable [QEGVAR(training,hitIndikatorMarkers), []];
     _hitmarkers pushBack _marker;
-    _board setVariable [QEGVAR(training,hitIndikatorMarkers), _hitmarkers, true];
+    _board setVariable [QEGVAR(training,hitIndikatorMarkers), _hitmarkers];
 
     private _color = _object getVariable QEGVAR(training,hitIndikatorColor);
-    _marker setObjectTextureGlobal [0, _color];
+    _marker setObjectTexture [0, _color];
     [{_this#0 setObjectScale 0.5;}, [_marker]] call CBA_fnc_execNextFrame;
 }];

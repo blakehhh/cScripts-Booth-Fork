@@ -20,9 +20,7 @@ private _arsenalStatement = {
     INFO_2("Staging Arsenal", "Creating staging arsenal for %1 [%2]", player, typeOf player);
 
     call FUNC(clearDefaultArsenalLoadouts);
-    waitUntil { count ace_arsenal_defaultLoadoutsList == 0 };
     call FUNC(addDefaultArsenalLoadout);
-    waitUntil { count ace_arsenal_defaultLoadoutsList != 0 };
 
     if (EGVAR(Settings,useFilteredArsenal)) then {
         private _items = GETVAR(player,EGVAR(Player,ArsenalWhitelist), []);
@@ -33,17 +31,13 @@ private _arsenalStatement = {
             _items = GETVAR(player,EGVAR(Player,ArsenalWhitelist), []);
         };
 
-        INFO_3("Staging Arsenal", "Whitleist containing %1 items added to %2 [%3]", count _items, player, typeOf player);
-        if (_items isEqualTo []) exitWith {
-            SHOW_WARNING_2("Staging Arsenal", "Whitleist is empty for %1 [%2]", player, typeOf player);
-            [
-                [],
-                ["Arsenal is not avalible for your class."],
-                [""],
-                [""]
-            ] call CBA_fnc_notify;
+        if (_items isNotEqualTo []) then {
+            INFO_3("Staging Arsenal", "Whitelist containing %1 items added to %2 [%3]", count _items, player, typeOf player);
+            [player, _items] call ace_arsenal_fnc_addVirtualItems;
+        } else {
+            SHOW_WARNING_2("Staging Arsenal", "Whitelist is empty for %1 [%2], falling back to full arsenal", player, typeOf player);
+            [player, true] call ace_arsenal_fnc_addVirtualItems;
         };
-        [player, _items] call ace_arsenal_fnc_addVirtualItems;
     } else {
         [player, true] call ace_arsenal_fnc_addVirtualItems;
     };

@@ -22,8 +22,12 @@ private _empty = [[],[],[],[],[],[],"","",[],["","","","","",""]];
 ["<empty>", _empty, false] call ace_arsenal_fnc_addDefaultLoadout;
 
 private _loadout = [player] call EFUNC(gear,getLoadoutName);
-if !(isClass (missionConfigFile >> "CfgLoadouts" >> _loadout)) exitWith {
-    SHOW_CHAT_WARNING_1("Default Arsenal", "Loadout '%1' does not exist inside of mission config. No default arsenal will be created.", _loadout);
+private _loadoutCfg = missionConfigFile >> "CfgLoadouts" >> _loadout;
+if !(isClass _loadoutCfg) exitWith {
+    private _current = getUnitLoadout player;
+    if (EGVAR(patches,usesACRE)) then { _current = [_current] call acre_api_fnc_filterUnitLoadout; };
+    [format ["[Current] %1", _loadout], _current, false] call ace_arsenal_fnc_addDefaultLoadout;
+    INFO_1("Default Arsenal", "Loadout '%1' not in CfgLoadouts; created default loadout from current gear", _loadout);
 };
 
 private _name = getText (missionConfigFile >> "CfgLoadouts" >> _loadout >> "displayName");

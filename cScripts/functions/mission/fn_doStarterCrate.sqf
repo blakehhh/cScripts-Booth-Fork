@@ -36,7 +36,7 @@ params [
     ["_hasStagingZone", true, [true]]
 ];
 
-INFO_2("StarterCrate", "Starting to apply functions to %1 (%2)", _crate, typeOf _crate);
+INFO_2("StarterCrate", "Starting to apply functions to %1 (%2)", _object, typeOf _object);
 
 // Lowercase
 _quickSelectScale = toLower(_quickSelectScale);
@@ -94,7 +94,7 @@ _object enableRopeAttach false;
 [_object, -1] call ace_cargo_fnc_setSize;
 
 // Make Starter crate clean junk around it
-[_object, 100] call FUNC(deleteDroppedObjects);
+[_object, 15] call FUNC(deleteDroppedObjects);
 
 
 

@@ -1,7 +1,7 @@
-#include "..\script_component.hpp";
+#include "..\script_component.hpp"
 /*
  * Author: CPL.Brostrom.A, SPC.Turn.J
- * This scripts crate the 7th cavalry field hostpital.
+ * This script creates the 7th Cavalry field hospital.
  * It adds equipment and some optional selections to a given object.
  *
  * Arguments:
@@ -19,7 +19,7 @@ params [
     ["_isFacility", true]
 ];
 
-INFO("", "Field Hostiptal applied to %1.", _crate);
+INFO("", "Field Hospital applied to %1.", _crate);
 
 // Make addAction Topic
 _crate addAction ["<img image='cScripts\Data\Icon\icon_00.paa' /> Field Hospital", {}, [], 1.5, true, true, "", "true", 5];
@@ -28,13 +28,12 @@ if (_isFacility) then {
     _crate setVariable ["ace_medical_isMedicalFacility", true, true];
 };
 
-// If isServer add medical equipment
+// If isServer add medical equipment and set ACE attributes locally
 if (isServer) then {
-    private _crateContent = ["atlas"] call FUNC(getMedicalCrate);
+    private _crateContent = ["crate_medicalAtlas"] call EFUNC(logistics,getContainer);
     [_crate, _crateContent] call FUNC(setCargo);
-};
 
-// Change ace logistics size of crate
-[_crate, 1] remoteExec ["ace_cargo_fnc_setSize",0,true];
-[_crate, true] remoteExec ["ace_dragging_fnc_setDraggable",0,true];
-[_crate, true] remoteExec ["ace_dragging_fnc_setCarryable",0,true];
+    [_crate, 1] call ace_cargo_fnc_setSize;
+    [_crate, true] call ace_dragging_fnc_setDraggable;
+    [_crate, true] call ace_dragging_fnc_setCarryable;
+};

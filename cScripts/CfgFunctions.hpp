@@ -52,8 +52,6 @@ class cScripts {
 
     class mission {
         file = "cScripts\functions\mission";
-        class gate {};
-        class teleport {};
         class addLoadoutAction {};
 
         class addGetOutHelo {};
@@ -64,9 +62,6 @@ class cScripts {
 
         class setVehicleLable {};
         
-        class addBaseCrate {};
-
-
         class doStarterCrate {};
 
         class makeAgent {};
@@ -110,6 +105,7 @@ class cScripts {
         class addEatMeal {};
         class addRolePermissions {};
         class addLoadoutLocker {};
+        class loadoutLocker_ui {};
         
         class createActionCategory {};
 
@@ -120,9 +116,6 @@ class cScripts {
 
 
         class filterUnitLoadout {};
-
-
-        class isValidFaction {};
         
         class createVehicleLable {};
         class getVehicleLable {};
