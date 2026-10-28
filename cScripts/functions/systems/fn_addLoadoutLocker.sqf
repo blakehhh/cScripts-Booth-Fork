@@ -6,6 +6,7 @@
  * Arguments:
  * 0: Object <OBJECT>
  * 1: Height Offset <NUMBER or ARRAY> (Optional)
+ * 2: Marker Height <NUMBER> (Optional, Default: 1.1)
  *
  * Example:
  * [this] call cScripts_fnc_addLoadoutLocker;
@@ -13,7 +14,8 @@
 
 params [
     ["_object", objNull, [objNull]],
-    ["_heightOffset", 0, [0, []]]
+    ["_heightOffset", 0, [0, []]],
+    ["_markerHeight", 1.1, [0]]
 ];
 
 if (isNull _object) exitWith {};
@@ -22,6 +24,9 @@ if (isNull _object) exitWith {};
 if (_heightOffset isEqualType 0) then {
     _heightOffset = [0, 0, _heightOffset];
 };
+
+// Store marker height for the 3D indicator
+_object setVariable [QEGVAR(systems,markerHeight), _markerHeight];
 
 // Register in missionNamespace locker pool for class-independent respawn checks
 private _allLockers = missionNamespace getVariable [QEGVAR(systems,allLockers), []];
@@ -94,6 +99,7 @@ private _claimAction = [
         _target setVariable [QEGVAR(systems,locker_owner), name _player, true];
         _target setVariable [QEGVAR(systems,locker_ownerUID), getPlayerUID _player, true];
         _player setVariable [QEGVAR(systems,claimed_locker), _target, true];
+        ["create", [_target]] call FUNC(loadoutLocker_marker);
         ["Locker Claimed."] call ace_common_fnc_displayTextPicture;
     },
     { (_target getVariable [QEGVAR(systems,locker_ownerUID), ""]) == "" },
@@ -102,6 +108,16 @@ private _claimAction = [
     _heightOffset
 ] call ace_interact_menu_fnc_createAction;
 [_object, 0, [], _claimAction] call ace_interact_menu_fnc_addActionToObject;
+
+// Restore marker if the local player already owns this locker (e.g. JIP / respawn)
+[{
+    params ["_object"];
+    if (isNull _object || {isNull player}) exitWith {};
+    if ((_object getVariable [QEGVAR(systems,locker_ownerUID), ""]) == getPlayerUID player) then {
+        player setVariable [QEGVAR(systems,claimed_locker), _object, true];
+        ["create", [_object]] call FUNC(loadoutLocker_marker);
+    };
+}, [_object]] call CBA_fnc_execNextFrame;
 
 // 2. Owner Locker Action (Visible only to the owner; opens the GUI)
 private _ownerAction = [
@@ -184,6 +200,7 @@ private _adminAction = [
                     private _ownerUnit = allPlayers select _ownerIndex;
                     _ownerUnit setVariable [QEGVAR(systems,claimed_locker), objNull, true];
                     ["closeDisplay", []] remoteExecCall [QFUNC(loadoutLocker_ui), _ownerUnit];
+                    ["delete", []] remoteExecCall [QFUNC(loadoutLocker_marker), _ownerUnit];
                 };
 
                 if (!isNull (findDisplay 19100)) then {

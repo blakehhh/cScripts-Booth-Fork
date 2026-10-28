@@ -20,6 +20,10 @@ INFO("InitEventHandlers","Creating Global EventHandlers");
 if (GVAR(isPlayer)) then {
     INFO("InitEventHandlers","Creating Client EventHandlers");
 
+    ["unit", {
+        ["update"] call FUNC(loadoutLocker_marker);
+    }] call CBA_fnc_addPlayerEventHandler;
+
     // TODO: Possibly use in the future 
     //["ace_zeusCreated", {
     //    _this params ["_zeus"];

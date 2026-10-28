@@ -247,6 +247,7 @@ switch (_mode) do {
             (findDisplay 19100) closeDisplay 1;
             closeDialog 0;
         };
+        ["delete"] call FUNC(loadoutLocker_marker);
     };
 
     case "abandonLocker": {
@@ -261,6 +262,7 @@ switch (_mode) do {
             _target setVariable [QEGVAR(systems,locker_ownerUID), "", true];
             player setVariable [QEGVAR(systems,claimed_locker), objNull, true];
             missionNamespace setVariable ["cScripts_ui_currentLocker", objNull];
+            ["delete"] call FUNC(loadoutLocker_marker);
             ["Locker Abandoned."] call ace_common_fnc_displayTextPicture;
         };
     };

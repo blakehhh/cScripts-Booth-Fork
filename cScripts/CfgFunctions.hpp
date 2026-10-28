@@ -106,6 +106,7 @@ class cScripts {
         class addRolePermissions {};
         class addLoadoutLocker {};
         class loadoutLocker_ui {};
+        class loadoutLocker_marker {};
         
         class createActionCategory {};
 
