@@ -36,7 +36,40 @@ if (isServer) then {
     _object setVariable ["ace_field_rations_currentWaterSupply", -1, true];
 };
 
+// Mark object as a locker and disable slingload / ACE cargo / dragging
+_object setVariable [QEGVAR(systems,isLocker), true];
+_object enableRopeAttach false;
+[_object, -1] call ace_cargo_fnc_setSize;
+
 if (!hasInterface) exitWith {};
+
+// Disable default ACE_MainActions ("Interactions") on locker objects so only the locker root node appears
+[{
+    params ["_object"];
+    if (isNull _object) exitWith {};
+
+    private _objectType = typeOf _object;
+    [_objectType] call ace_interact_menu_fnc_compileMenu;
+    if (!isNil "ace_interact_menu_fnc_addMainAction") then {
+        [_objectType, 0] call ace_interact_menu_fnc_addMainAction;
+    };
+
+    private _classActionTrees = if (ace_interact_menu_ActNamespace isEqualType createHashMap) then {
+        ace_interact_menu_ActNamespace getOrDefault [_objectType, []]
+    } else {
+        ace_interact_menu_ActNamespace getVariable [_objectType, []]
+    };
+    private _mainActionNode = [_classActionTrees, ["ACE_MainActions"]] call ace_interact_menu_fnc_findActionNode;
+    if (!isNil "_mainActionNode") then {
+        (_mainActionNode select 0) set [4, {!(_target getVariable [QEGVAR(systems,isLocker), false])}];
+    };
+
+    private _objActionTrees = _object getVariable ["ace_interact_menu_actions", []];
+    private _objMainActionNode = [_objActionTrees, ["ACE_MainActions"]] call ace_interact_menu_fnc_findActionNode;
+    if (!isNil "_objMainActionNode") then {
+        (_objMainActionNode select 0) set [4, {false}];
+    };
+}, [_object]] call CBA_fnc_execNextFrame;
 
 // 1. Claim Locker Action (Visible only when unclaimed)
 private _claimAction = [
