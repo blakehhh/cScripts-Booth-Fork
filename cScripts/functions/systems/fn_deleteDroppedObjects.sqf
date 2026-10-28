@@ -35,5 +35,5 @@ _object setVariable [QGVAR(hasDeleteDroppedEH), true];
                 };
             } forEach _holders;
         };
-    }, [_object, _thisArgs], 120] call CBA_fnc_waitAndExecute;
+    }, [_object, _thisArgs], 800] call CBA_fnc_waitAndExecute;
 }, _radius] call CBA_fnc_addBISEventHandler;
