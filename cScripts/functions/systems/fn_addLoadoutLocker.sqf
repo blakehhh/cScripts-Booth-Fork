@@ -6,7 +6,7 @@
  * Arguments:
  * 0: Object <OBJECT>
  * 1: Height Offset <NUMBER or ARRAY> (Optional)
- * 2: Marker Height <NUMBER> (Optional, Default: 1.1)
+ * 2: Marker Height <NUMBER> (Optional, Default: 0.95)
  *
  * Example:
  * [this] call cScripts_fnc_addLoadoutLocker;
@@ -15,7 +15,7 @@
 params [
     ["_object", objNull, [objNull]],
     ["_heightOffset", 0, [0, []]],
-    ["_markerHeight", 1.1, [0]]
+    ["_markerHeight", 0.95, [0]]
 ];
 
 if (isNull _object) exitWith {};

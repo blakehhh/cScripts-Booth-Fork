@@ -29,16 +29,18 @@ switch (_mode) do {
         // Clean up any existing marker first
         ["delete"] call FUNC(loadoutLocker_marker);
 
-        private _markerHeight = _locker getVariable [QEGVAR(systems,markerHeight), 1.1];
+        private _markerHeight = _locker getVariable [QEGVAR(systems,markerHeight), 0.95];
 
-        private _marker = "Sign_Arrow_Yellow_F" createVehicleLocal [0, 0, 0];
+        private _marker = "Sign_Sphere25cm_F" createVehicleLocal [0, 0, 0];
         _marker allowDamage false;
-        _marker setObjectTexture [0, "#(argb,8,8,3)color(1,1,0,0.6,ca)"];
+        _marker setObjectTexture [0, "#(argb,8,8,3)color(0.408,0.671,0.333,0.15,ca)"];
         _marker attachTo [_locker, [0, 0, _markerHeight]];
+        _marker setObjectScale 0.45;
+        _marker hideObject ((player distance _locker) > 25);
 
         missionNamespace setVariable [QGVAR(loadoutLocker_marker), _marker];
 
-        // 3 RPM = 1080 deg / 60 sec = 18 deg / sec
+        // Hide marker when further than 25m away
         private _pfh = [{
             params ["_args", "_handle"];
             _args params ["_marker", "_locker"];
@@ -48,8 +50,12 @@ switch (_mode) do {
                 missionNamespace setVariable [QGVAR(loadoutLocker_marker), objNull];
                 missionNamespace setVariable [QGVAR(loadoutLocker_markerPFH), -1];
             };
-            _marker setDir ((diag_tickTime * 18) % 360);
-        }, 0, [_marker, _locker]] call CBA_fnc_addPerFrameHandler;
+
+            private _shouldHide = (player distance _locker) > 25;
+            if (isObjectHidden _marker isNotEqualTo _shouldHide) then {
+                _marker hideObject _shouldHide;
+            };
+        }, 0.5, [_marker, _locker]] call CBA_fnc_addPerFrameHandler;
 
         missionNamespace setVariable [QGVAR(loadoutLocker_markerPFH), _pfh];
     };
