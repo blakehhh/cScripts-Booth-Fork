@@ -8,10 +8,11 @@
 #define ST_RIGHT            0x01
 #define ST_CENTER           0x02
 #define ST_VCENTER          0x0c
+#define ST_PICTURE          48
 #define ST_BACKGROUND       80
 
 // Dialog Dimensions (Centered)
-#define LOCKER_W 0.54
+#define LOCKER_W 0.74
 #define LOCKER_H 0.48
 #define LOCKER_X (safezoneX + (safezoneW - LOCKER_W) / 2)
 #define LOCKER_Y (safezoneY + (safezoneH - LOCKER_H) / 2)
@@ -36,6 +37,13 @@ class cScripts_RscText {
     y = 0;
     h = 0.037;
     w = 0.3;
+};
+
+class cScripts_RscPicture: cScripts_RscText {
+    style = ST_PICTURE;
+    colorBackground[] = {0, 0, 0, 0};
+    colorText[] = {1, 1, 1, 1};
+    shadow = 0;
 };
 
 class cScripts_RscStructuredText {
@@ -130,7 +138,30 @@ class cScripts_RscLoadoutLocker {
             h = LOCKER_H;
         };
 
-        // Left Column (Presets) Backgrounds
+        // Column 1 (Medical Status) Backgrounds
+        class MedicalHeader: cScripts_RscText {
+            style = ST_LEFT + ST_VCENTER;
+            colorBackground[] = {0.14, 0.17, 0.22, 1.0};
+            colorText[] = {0.95, 0.75, 0.15, 1.0};
+            font = "RobotoCondensedBold";
+            sizeEx = "(((((safezoneW / safezoneH) min 1.2) / 1.2) / 25) * 0.95)";
+            text = " MEDICAL STATUS";
+            x = LOCKER_X + 0.016;
+            y = LOCKER_Y + 0.048;
+            w = 0.228;
+            h = 0.028;
+        };
+
+        class MedicalPanel: cScripts_RscText {
+            style = ST_BACKGROUND;
+            colorBackground[] = {0.14, 0.17, 0.22, 0.5};
+            x = LOCKER_X + 0.016;
+            y = LOCKER_Y + 0.076;
+            w = 0.228;
+            h = 0.250;
+        };
+
+        // Column 2 (Presets) Backgrounds
         class PresetsHeader: cScripts_RscText {
             style = ST_LEFT + ST_VCENTER;
             colorBackground[] = {0.14, 0.17, 0.22, 1.0};
@@ -138,22 +169,22 @@ class cScripts_RscLoadoutLocker {
             font = "RobotoCondensedBold";
             sizeEx = "(((((safezoneW / safezoneH) min 1.2) / 1.2) / 25) * 0.95)";
             text = " LOADOUT PRESETS";
-            x = LOCKER_X + 0.016;
+            x = LOCKER_X + 0.256;
             y = LOCKER_Y + 0.048;
-            w = 0.248;
+            w = 0.228;
             h = 0.028;
         };
 
         class PresetsPanel: cScripts_RscText {
             style = ST_BACKGROUND;
             colorBackground[] = {0.14, 0.17, 0.22, 0.5};
-            x = LOCKER_X + 0.016;
+            x = LOCKER_X + 0.256;
             y = LOCKER_Y + 0.076;
-            w = 0.248;
+            w = 0.228;
             h = 0.250;
         };
 
-        // Right Column (Roles) Backgrounds
+        // Column 3 (Roles) Backgrounds
         class RolesHeader: cScripts_RscText {
             style = ST_LEFT + ST_VCENTER;
             colorBackground[] = {0.14, 0.17, 0.22, 1.0};
@@ -161,18 +192,18 @@ class cScripts_RscLoadoutLocker {
             font = "RobotoCondensedBold";
             sizeEx = "(((((safezoneW / safezoneH) min 1.2) / 1.2) / 25) * 0.95)";
             text = " SPECIALTY ROLES";
-            x = LOCKER_X + 0.276;
+            x = LOCKER_X + 0.496;
             y = LOCKER_Y + 0.048;
-            w = 0.248;
+            w = 0.228;
             h = 0.028;
         };
 
         class RolesPanel: cScripts_RscText {
             style = ST_BACKGROUND;
             colorBackground[] = {0.14, 0.17, 0.22, 0.5};
-            x = LOCKER_X + 0.276;
+            x = LOCKER_X + 0.496;
             y = LOCKER_Y + 0.076;
-            w = 0.248;
+            w = 0.228;
             h = 0.250;
         };
 
@@ -230,13 +261,114 @@ class cScripts_RscLoadoutLocker {
             action = "closeDialog 0;";
         };
 
-        // Left Column (Loadouts) Controls
+        // Column 1 (Medical Triage Silhouette) Controls
+        class BodyBackground: cScripts_RscPicture {
+            idc = 19200;
+            text = "\z\ace\addons\medical_gui\data\body_image\background.paa";
+            x = LOCKER_X + 0.0675;
+            y = LOCKER_Y + 0.082;
+            w = 0.125;
+            h = 0.200;
+        };
+
+        class BodyHead: cScripts_RscPicture {
+            idc = 19201;
+            text = "\z\ace\addons\medical_gui\data\body_image\head.paa";
+            x = LOCKER_X + 0.0675;
+            y = LOCKER_Y + 0.082;
+            w = 0.125;
+            h = 0.200;
+        };
+
+        class BodyTorso: cScripts_RscPicture {
+            idc = 19202;
+            text = "\z\ace\addons\medical_gui\data\body_image\torso.paa";
+            x = LOCKER_X + 0.0675;
+            y = LOCKER_Y + 0.082;
+            w = 0.125;
+            h = 0.200;
+        };
+
+        class BodyArmLeft: cScripts_RscPicture {
+            idc = 19203;
+            text = "\z\ace\addons\medical_gui\data\body_image\arm_left.paa";
+            x = LOCKER_X + 0.0675;
+            y = LOCKER_Y + 0.082;
+            w = 0.125;
+            h = 0.200;
+        };
+
+        class BodyArmRight: cScripts_RscPicture {
+            idc = 19204;
+            text = "\z\ace\addons\medical_gui\data\body_image\arm_right.paa";
+            x = LOCKER_X + 0.0675;
+            y = LOCKER_Y + 0.082;
+            w = 0.125;
+            h = 0.200;
+        };
+
+        class BodyLegLeft: cScripts_RscPicture {
+            idc = 19205;
+            text = "\z\ace\addons\medical_gui\data\body_image\leg_left.paa";
+            x = LOCKER_X + 0.0675;
+            y = LOCKER_Y + 0.082;
+            w = 0.125;
+            h = 0.200;
+        };
+
+        class BodyLegRight: cScripts_RscPicture {
+            idc = 19206;
+            text = "\z\ace\addons\medical_gui\data\body_image\leg_right.paa";
+            x = LOCKER_X + 0.0675;
+            y = LOCKER_Y + 0.082;
+            w = 0.125;
+            h = 0.200;
+        };
+
+        class MedicalStatusText: cScripts_RscStructuredText {
+            idc = 19210;
+            x = LOCKER_X + 0.021;
+            y = LOCKER_Y + 0.276;
+            w = 0.218;
+            h = 0.032;
+            size = "(((((safezoneW / safezoneH) min 1.2) / 1.2) / 25) * 0.90)";
+            class Attributes {
+                font = "RobotoCondensed";
+                color = "#ffffff";
+                colorLink = "#D09B43";
+                align = "center";
+                shadow = 1;
+            };
+        };
+
+        // Field Rations Icons (Top-Right of Medical Panel)
+        class ThirstStatus: cScripts_RscPicture {
+            idc = 19220;
+            text = "\z\ace\addons\field_rations\ui\icon_hud_thirststatus.paa";
+            tooltip = "Thirst";
+            x = LOCKER_X + 0.180;
+            y = LOCKER_Y + 0.090;
+            w = 0.022;
+            h = 0.028;
+        };
+
+        class HungerStatus: cScripts_RscPicture {
+            idc = 19221;
+            text = "\z\ace\addons\field_rations\ui\icon_hud_hungerstatus.paa";
+            tooltip = "Hunger";
+            x = LOCKER_X + 0.206;
+            y = LOCKER_Y + 0.090;
+            w = 0.022;
+            h = 0.028;
+        };
+
+        // Column 2 (Loadouts) Controls
         class BtnCombatKit: cScripts_RscButton {
             idc = 19110;
             text = "Equip Combat Kit";
-            x = LOCKER_X + 0.026;
+            x = LOCKER_X + 0.266;
             y = LOCKER_Y + 0.088;
-            w = 0.228;
+            w = 0.208;
             h = 0.038;
             action = "['equipKit', ['Combat Kit']] call cScripts_fnc_loadoutLocker_ui;";
         };
@@ -244,9 +376,9 @@ class cScripts_RscLoadoutLocker {
         class BtnReconKit: cScripts_RscButton {
             idc = 19111;
             text = "Equip Recon Kit";
-            x = LOCKER_X + 0.026;
+            x = LOCKER_X + 0.266;
             y = LOCKER_Y + 0.138;
-            w = 0.228;
+            w = 0.208;
             h = 0.038;
             action = "['equipKit', ['Recon Kit']] call cScripts_fnc_loadoutLocker_ui;";
         };
@@ -254,9 +386,9 @@ class cScripts_RscLoadoutLocker {
         class BtnCasualKit: cScripts_RscButton {
             idc = 19112;
             text = "Equip Casual Kit";
-            x = LOCKER_X + 0.026;
+            x = LOCKER_X + 0.266;
             y = LOCKER_Y + 0.188;
-            w = 0.228;
+            w = 0.208;
             h = 0.038;
             action = "['equipKit', ['Casual Kit']] call cScripts_fnc_loadoutLocker_ui;";
         };
@@ -264,29 +396,29 @@ class cScripts_RscLoadoutLocker {
         class BtnArsenal: cScripts_RscButtonAccent {
             idc = 19113;
             text = "OPEN TFG ARSENAL";
-            x = LOCKER_X + 0.026;
+            x = LOCKER_X + 0.266;
             y = LOCKER_Y + 0.255;
-            w = 0.228;
+            w = 0.208;
             h = 0.053;
             action = "['openArsenal'] call cScripts_fnc_loadoutLocker_ui;";
         };
 
-        // Right Column (Roles) Controls
+        // Column 3 (Roles) Controls
         class BgRoleCLS: cScripts_RscText {
             idc = 19125;
             style = ST_BACKGROUND;
             colorBackground[] = {0.18, 0.22, 0.28, 1};
-            x = LOCKER_X + 0.286;
+            x = LOCKER_X + 0.506;
             y = LOCKER_Y + 0.088;
-            w = 0.228;
+            w = 0.208;
             h = 0.038;
         };
         class BtnRoleCLS: cScripts_RscButtonRole {
             idc = 19120;
             text = "Combat Lifesaver (CLS)";
-            x = LOCKER_X + 0.286;
+            x = LOCKER_X + 0.506;
             y = LOCKER_Y + 0.088;
-            w = 0.228;
+            w = 0.208;
             h = 0.038;
             action = "['setRole', ['CLS']] call cScripts_fnc_loadoutLocker_ui;";
         };
@@ -295,17 +427,17 @@ class cScripts_RscLoadoutLocker {
             idc = 19126;
             style = ST_BACKGROUND;
             colorBackground[] = {0.18, 0.22, 0.28, 1};
-            x = LOCKER_X + 0.286;
+            x = LOCKER_X + 0.506;
             y = LOCKER_Y + 0.132;
-            w = 0.228;
+            w = 0.208;
             h = 0.038;
         };
         class BtnRoleMedic: cScripts_RscButtonRole {
             idc = 19121;
             text = "Medic / Doctor";
-            x = LOCKER_X + 0.286;
+            x = LOCKER_X + 0.506;
             y = LOCKER_Y + 0.132;
-            w = 0.228;
+            w = 0.208;
             h = 0.038;
             action = "['setRole', ['Medic']] call cScripts_fnc_loadoutLocker_ui;";
         };
@@ -314,17 +446,17 @@ class cScripts_RscLoadoutLocker {
             idc = 19127;
             style = ST_BACKGROUND;
             colorBackground[] = {0.18, 0.22, 0.28, 1};
-            x = LOCKER_X + 0.286;
+            x = LOCKER_X + 0.506;
             y = LOCKER_Y + 0.176;
-            w = 0.228;
+            w = 0.208;
             h = 0.038;
         };
         class BtnRoleEngineer: cScripts_RscButtonRole {
             idc = 19122;
             text = "Advanced Engineer";
-            x = LOCKER_X + 0.286;
+            x = LOCKER_X + 0.506;
             y = LOCKER_Y + 0.176;
-            w = 0.228;
+            w = 0.208;
             h = 0.038;
             action = "['setRole', ['Engineer']] call cScripts_fnc_loadoutLocker_ui;";
         };
@@ -333,17 +465,17 @@ class cScripts_RscLoadoutLocker {
             idc = 19128;
             style = ST_BACKGROUND;
             colorBackground[] = {0.18, 0.22, 0.28, 1};
-            x = LOCKER_X + 0.286;
+            x = LOCKER_X + 0.506;
             y = LOCKER_Y + 0.220;
-            w = 0.228;
+            w = 0.208;
             h = 0.038;
         };
         class BtnRoleEOD: cScripts_RscButtonRole {
             idc = 19123;
             text = "EOD Specialist";
-            x = LOCKER_X + 0.286;
+            x = LOCKER_X + 0.506;
             y = LOCKER_Y + 0.220;
-            w = 0.228;
+            w = 0.208;
             h = 0.038;
             action = "['setRole', ['EOD']] call cScripts_fnc_loadoutLocker_ui;";
         };
@@ -351,9 +483,9 @@ class cScripts_RscLoadoutLocker {
         class BtnRoleClear: cScripts_RscButton {
             idc = 19124;
             text = "Remove All Roles";
-            x = LOCKER_X + 0.286;
+            x = LOCKER_X + 0.506;
             y = LOCKER_Y + 0.270;
-            w = 0.228;
+            w = 0.208;
             h = 0.038;
             action = "['setRole', ['clearAll']] call cScripts_fnc_loadoutLocker_ui;";
         };
@@ -364,7 +496,7 @@ class cScripts_RscLoadoutLocker {
             text = "Full Treatment";
             x = LOCKER_X + 0.026;
             y = LOCKER_Y + 0.386;
-            w = 0.155;
+            w = 0.220;
             h = 0.058;
             action = "['heal'] call cScripts_fnc_loadoutLocker_ui;";
         };
@@ -372,9 +504,9 @@ class cScripts_RscLoadoutLocker {
         class BtnEatDrink: cScripts_RscButton {
             idc = 19131;
             text = "Eat & Drink";
-            x = LOCKER_X + 0.192;
+            x = LOCKER_X + 0.260;
             y = LOCKER_Y + 0.386;
-            w = 0.155;
+            w = 0.220;
             h = 0.058;
             action = "['eatAndDrink'] call cScripts_fnc_loadoutLocker_ui;";
         };
@@ -382,9 +514,9 @@ class cScripts_RscLoadoutLocker {
         class BtnAbandon: cScripts_RscButtonDanger {
             idc = 19140;
             text = "Abandon Locker";
-            x = LOCKER_X + 0.358;
+            x = LOCKER_X + 0.494;
             y = LOCKER_Y + 0.386;
-            w = 0.155;
+            w = 0.220;
             h = 0.058;
             action = "['abandonLocker'] call cScripts_fnc_loadoutLocker_ui;";
         };

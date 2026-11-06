@@ -92,6 +92,82 @@ switch (_mode) do {
 
         _btnCasual ctrlSetText (if (_hasCasual) then {"Equip Casual Kit"} else {"Casual Kit (Not Found)"});
         _btnCasual ctrlEnable _hasCasual;
+
+        // 3. Medical Triage Silhouette & Status Summary
+        private _bodyPartDamage = player getVariable ["ace_medical_bodyPartDamage", [0, 0, 0, 0, 0, 0]];
+        private _baseThreshold = player getVariable ["ace_medical_damageThreshold", missionNamespace getVariable ["ace_medical_playerDamageThreshold", 1]];
+        private _partIDCs = [19201, 19202, 19203, 19204, 19205, 19206];
+        private _limbThresholdCfg = missionNamespace getVariable ["ace_medical_limbDamageThreshold", 0];
+        private _useLimbDamage = [false, !isPlayer player, true] select (missionNamespace getVariable ["ace_medical_useLimbDamage", 0]);
+
+        private _totalDamage = 0;
+
+        {
+            private _partIndex = _forEachIndex;
+            private _ctrlPart = _display displayCtrl _x;
+            private _damage = _bodyPartDamage param [_partIndex, 0];
+            _totalDamage = _totalDamage + _damage;
+
+            private _threshold = switch (_partIndex) do {
+                case 0: {_baseThreshold * 1.25};
+                case 1: {_baseThreshold * 1.5};
+                default {
+                    if (_limbThresholdCfg != 0 && {_useLimbDamage}) then {
+                        _baseThreshold * _limbThresholdCfg
+                    } else {
+                        1.2
+                    };
+                };
+            };
+            private _normDamage = (_damage / (0.01 max _threshold)) min 1;
+            private _color = if (!isNil "ace_medical_gui_fnc_damageToRGBA") then {
+                [_normDamage] call ace_medical_gui_fnc_damageToRGBA
+            } else {
+                [1, 1 - _normDamage, 1 - _normDamage, 1]
+            };
+
+            _ctrlPart ctrlSetTextColor _color;
+        } forEach _partIDCs;
+
+        private _ctrlMedText = _display displayCtrl 19210;
+        private _bloodVolume = player getVariable ["ace_medical_bloodVolume", 6.0];
+        private _statusStr = if (_totalDamage > 0.05 || {_bloodVolume < 5.9}) then {
+            "<t color='#f0c040'>Injured</t>"
+        } else {
+            "<t color='#88ff88'>Healthy</t>"
+        };
+        _ctrlMedText ctrlSetStructuredText parseText format ["<t align='center'>%1</t>", _statusStr];
+
+        // 4. Field Rations Status Icons (Thirst & Hunger)
+        private _ctrlThirst = _display displayCtrl 19220;
+        private _ctrlHunger = _display displayCtrl 19221;
+        if (missionNamespace getVariable ["acex_field_rations_enabled", false]) then {
+            private _thirst = player getVariable ["acex_field_rations_thirst", 0];
+            private _hunger = player getVariable ["acex_field_rations_hunger", 0];
+
+            {
+                _x params ["_ctrl", "_val", "_label"];
+                private _color = if (_val <= 3) then {
+                    [0.5, 0.5, 0.5, 0.4]
+                } else {
+                    [
+                        1,
+                        linearConversion [35, 90, _val, 1, 0, true],
+                        linearConversion [0, 40, _val, 1, 0, true],
+                        1
+                    ]
+                };
+                _ctrl ctrlSetTextColor _color;
+                _ctrl ctrlSetTooltip format ["%1: %2%3", _label, round _val, "%"];
+                _ctrl ctrlShow true;
+            } forEach [
+                [_ctrlThirst, _thirst, "Thirst"],
+                [_ctrlHunger, _hunger, "Hunger"]
+            ];
+        } else {
+            _ctrlThirst ctrlShow false;
+            _ctrlHunger ctrlShow false;
+        };
     };
 
     case "equipKit": {
